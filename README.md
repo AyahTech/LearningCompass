@@ -1,1 +1,1 @@
-# LearningCompass
+# LearningCompass 🧭
