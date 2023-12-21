@@ -53,4 +53,6 @@ convo.send_message("official websites and youtube channels that offer learning m
 
 # Response
 with st.chat_message("assistant"):
-    st.markdown(convo.last.text)
+    if prompt:
+      st.markdown(convo.last.text)
+
