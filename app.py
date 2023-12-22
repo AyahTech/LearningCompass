@@ -1,6 +1,5 @@
 # Import necessary libraries
 import streamlit as st
-from streamlit_extras.app_logo import add_logo
 from streamlit_extras.let_it_rain import rain
 import hydralit_components as hc
 import time
