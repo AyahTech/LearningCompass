@@ -1,5 +1,6 @@
 # LearningCompass 🧭
 
+![LearningCompass](compass.svg)
 
 Learning Compass is a tool that allows users to enter their learning topics and generates a customized step-by-step learning path. It provides curated online resources to kickstart their learning journey!
 
