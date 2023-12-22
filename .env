@@ -1,1 +1,0 @@
-GEMINI_API_KEY="AIzaSyDfGoWenCyM53XsN-AB6dci5dpNxFR-WXg"
