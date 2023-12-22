@@ -1,3 +1,4 @@
+# Import necessary libraries
 import streamlit as st
 from streamlit_extras.app_logo import add_logo
 from streamlit_extras.let_it_rain import rain
@@ -5,15 +6,18 @@ import hydralit_components as hc
 import time
 import json
 import google.generativeai as genai
-from config import GEMINI_API_KEY
+import os
+from dotenv import load_dotenv
+from config import GEMINI_API_KEY  # Assuming GEMINI_API_KEY is defined in the config file
 from trulens_eval import LiteLLM, TruChain, Feedback, Tru
 
-
+# Initialize TruLens and load Gemini API key from environment variables
 tru = Tru()
-
+load_dotenv()
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Set up the model
+# Set up the model for chatbot
 generation_config = {
     "temperature": 0.6,
     "top_p": 1,
@@ -27,12 +31,14 @@ safety_settings = [
     {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
     {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
 ]
+
 model = genai.GenerativeModel(
     model_name="gemini-pro",
     generation_config=generation_config,
     safety_settings=safety_settings,
 )
 
+# Start a chat conversation with predefined history
 convo = model.start_chat(
     history=[
         {"role": "user", "parts": "official websites and youtube channels that offer learning materials on python"},
@@ -53,34 +59,36 @@ convo = model.start_chat(
     ]
 )
 
-# APP Layout z
-
+# Streamlit app layout
 st.image("./compass.svg")
 st.title("Learning Compass")
 st.markdown(
-        """
-        Welcome to Learning Compass! Embark on your learning journey here with custom learning paths **powered by Gemini**, guiding you towards knowledge and skill mastery tailored just for you.
-        """
-    )
+    """
+    Welcome to Learning Compass! Embark on your learning journey here with custom learning paths **powered by Gemini**, guiding you towards knowledge and skill mastery tailored just for you.
+    """
+)
 
+# Display raining emojis
 rain(
-        emoji="💠",
-        font_size=20,
-        falling_speed=10,
-        animation_length="infinite",
-    )
+    emoji="💠",
+    font_size=20,
+    falling_speed=10,
+    animation_length="infinite",
+)
 
-# Prompt
+# Prompt for user input
 prompt = st.chat_input("Enter your learning topic..")
-convo.send_message("design a step by step learning path with explaination and concepts to cover and provide online resouces like name only of websites and youtube channels on  " + str(prompt))
+convo.send_message("design a step-by-step learning path with explanations and concepts to cover and provide online resources like names only of websites and YouTube channels on  " + str(prompt))
 
-# Response
+# Display chatbot response
 if prompt:
     with st.chat_message("🧭"):
-      st.markdown(convo.last.text)
+        st.markdown(convo.last.text)
 
-litellm_provider  = LiteLLM(model_engine="gemini-pro")
+# Initialize TruLens components
+litellm_provider = LiteLLM(model_engine="gemini-pro")
 relevance = Feedback(litellm_provider.relevance).on_input_output()
 recorder = TruChain(model, feedbacks=[relevance])
 
+# Run TruLens dashboard
 tru.run_dashboard()
