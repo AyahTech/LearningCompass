@@ -6,7 +6,6 @@ import json
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-from config import GEMINI_API_KEY  # Assuming GEMINI_API_KEY is defined in the config file
 from trulens_eval import LiteLLM, TruChain, Feedback, Tru
 
 # Initialize TruLens and load Gemini API key from environment variables
