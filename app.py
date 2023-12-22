@@ -6,10 +6,7 @@ import json
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-from trulens_eval import LiteLLM, TruChain, Feedback, Tru
 
-# Initialize TruLens and load Gemini API key from environment variables
-tru = Tru()
 load_dotenv()
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 genai.configure(api_key=GEMINI_API_KEY)
@@ -82,10 +79,3 @@ if prompt:
     with st.chat_message("🧭"):
         st.markdown(convo.last.text)
 
-# Initialize TruLens components
-litellm_provider = LiteLLM(model_engine="gemini-pro")
-relevance = Feedback(litellm_provider.relevance).on_input_output()
-recorder = TruChain(model, feedbacks=[relevance])
-
-# Run TruLens dashboard
-tru.run_dashboard()
