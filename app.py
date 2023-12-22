@@ -3,7 +3,7 @@ import sys
 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-install(streamlit-extras)
+install("streamlit-extras")
 
 # Import necessary libraries
 import streamlit as st
