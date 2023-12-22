@@ -1,7 +1,6 @@
-protobuf==4.25.1
-python-dotenv==1.0.0
-streamlit==1.29.0
-streamlit_extras==0.3.6
-trulens_eval==0.19.2
+protobuf
+python-dotenv
+streamlit
+streamlit_extras
+trulens_eval
 google-generativeai
-google
