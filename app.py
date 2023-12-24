@@ -1,6 +1,5 @@
 # Import necessary libraries
 import streamlit as st
-from streamlit_extras.let_it_rain import rain
 import time
 import json
 import google.generativeai as genai
@@ -62,12 +61,6 @@ st.markdown(
     """
 )
 
-# Display raining emojis
-rain(
-    emoji="💠",
-    font_size=20,
-    falling_speed=10,
-    animation_length="infinite",
 )
 
 # Prompt for user input
