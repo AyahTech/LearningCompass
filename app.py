@@ -61,7 +61,6 @@ st.markdown(
     """
 )
 
-)
 
 # Prompt for user input
 prompt = st.text_input("Enter your learning topic..")
