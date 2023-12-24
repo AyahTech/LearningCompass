@@ -71,11 +71,11 @@ rain(
 )
 
 # Prompt for user input
-prompt = st.chat_input("Enter your learning topic..")
+prompt = st.text_input("Enter your learning topic..")
 convo.send_message("design a step-by-step learning path with explanations and concepts to cover and provide online resources like names only of websites and YouTube channels on  " + str(prompt))
 
 # Display chatbot response
 if prompt:
     with st.chat_message("🧭"):
-        st.markdown(convo.last.text)
+        st.info(convo.last.text)
 
